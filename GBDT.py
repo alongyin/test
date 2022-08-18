@@ -5,6 +5,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from sklearn.metrics import mean_squared_error
+from sklearn.inspection import permutation_importance
 import numpy as np
 
 boston = load_boston()
@@ -61,3 +62,20 @@ fig.tight_layout()
 fig.savefig("test6.jpg")
 
 #可视化特征重要性
+feature_importance = GBDTreg.feature_importances_
+sorted_idx = np.argsort(feature_importance)
+pos = np.arange(sorted_idx.shape[0]) + 0.5
+fig = plt.figure(figsize=(12,6))
+plt.subplot(1,2,1)
+plt.barh(pos,feature_importance[sorted_idx],align='center')
+plt.yticks(pos,np.array(boston.feature_names)[sorted_idx])
+plt.title('Feature Importance (MDI)')
+
+
+result = permutation_importance(GBDTreg,X_test,y_test,n_repeats=10,random_state=42,n_jobs=2)
+sorted_idx = result.importances_mean.argsort()
+plt.subplot(1,2,2)
+plt.boxplot(result.importances[sorted_idx].T,vert=False,labels=np.array(boston.feature_names)[sorted_idx])
+plt.title("Permutation Importance(test set)")
+fig.tight_layout()
+fig.savefig("test6.jpg")
