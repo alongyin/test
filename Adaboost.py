@@ -18,7 +18,7 @@ y = np.concatenate((y1,-y2+1))
 #绘制两组数据的图片
 #plt.scatter(X[:,0],X[:,1],marker='o',c=y)
 #plt.show()
-#plt.savefig("test3.jpg")
+#plt.savefig("test3.jpg")dsfsd
 
 #Adboost算法
 bdt = AdaBoostClassifier(DecisionTreeClassifier(max_depth=2,min_samples_split=20,min_samples_leaf=5),algorithm="SAMME",n_estimators=200,learning_rate=0.8)
