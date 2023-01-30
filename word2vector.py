@@ -19,8 +19,8 @@ class getFormatInput(object):
                     result_word.append(word)
                 yield result_word
 formatInput = getFormatInput(file_path)
-model = models.Word2Vec(formatInput,workers=20,min_count=5,vector_size=200)
-molde.save("./zh_word2vec")
+model = models.Word2Vec(formatInput,workers=100,min_count=5,vector_size=50)
+model.save("./zh_word2vec")
 
 
 
